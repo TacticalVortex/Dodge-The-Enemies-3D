@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqrf13u2ctkkr"]
+[gd_scene load_steps=12 format=3 uid="uid://cqrf13u2ctkkr"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_30xqp"]
 [ext_resource type="PackedScene" uid="uid://bob6qosipt0jk" path="res://player.tscn" id="1_kl4jg"]
 [ext_resource type="PackedScene" uid="uid://diiktw61vn3pm" path="res://mob.tscn" id="2_i4bgx"]
+[ext_resource type="FontFile" uid="uid://ddycoegkqxlul" path="res://fonts/Montserrat-Medium.ttf" id="4_cjulw"]
+[ext_resource type="Script" path="res://score_label.gd" id="5_r6vly"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r3v3y"]
 size = Vector3(60, 2, 60)
@@ -23,11 +25,17 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="Theme" id="Theme_2jarw"]
+default_font = ExtResource("4_cjulw")
+default_font_size = 22
+
 [node name="Main" type="Node"]
 script = ExtResource("1_30xqp")
 mob_scene = ExtResource("2_i4bgx")
 
 [node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -54,7 +62,7 @@ size = 19.0
 [node name="Cylinders" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -15)
 mesh = SubResource("CylinderMesh_arksx")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Cylinders"]
@@ -62,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 15)
 mesh = SubResource("CylinderMesh_arksx")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Cylinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -15)
 mesh = SubResource("CylinderMesh_arksx")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Cylinders"]
@@ -73,10 +81,54 @@ mesh = SubResource("CylinderMesh_arksx")
 curve = SubResource("Curve3D_p2igh")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.00416639, 0, -0.999991, 0, 1, 0, 0.999991, 0, -0.00416639, -13.1595, 0, -13.9785)
+transform = Transform3D(-0.00416639, 0, -0.99999, 0, 1, 0, 0.99999, 0, -0.00416639, -13.1595, 0, -13.9785)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2jarw")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 28.0
+offset_right = 130.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score: 0"
+script = ExtResource("5_r6vly")
+
+[node name="Retry" type="ColorRect" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[node name="Label" type="Label" parent="UserInterface/Retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -14.0
+offset_right = 109.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Enter to retry"
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
