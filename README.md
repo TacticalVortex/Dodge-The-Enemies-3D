@@ -2,7 +2,7 @@
 
 ![Screenshot 2025-02-05 211248](https://github.com/user-attachments/assets/2985e5a7-8e47-4030-a130-52bc034f189b)
 
-This is a 3D version of Dodge The Enemies, now with jumping and defeating enemies!
+This is a 3D version of Dodge The Enemies, now with jumping and defeating enemies to increase your score!
 
 godotengine.org/license
 
