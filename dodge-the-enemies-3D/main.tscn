@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://cqrf13u2ctkkr"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_30xqp"]
+[ext_resource type="Script" uid="uid://obixyj0d2i3i" path="res://main.gd" id="1_30xqp"]
 [ext_resource type="PackedScene" uid="uid://bob6qosipt0jk" path="res://player.tscn" id="1_kl4jg"]
 [ext_resource type="PackedScene" uid="uid://diiktw61vn3pm" path="res://mob.tscn" id="2_i4bgx"]
 [ext_resource type="FontFile" uid="uid://ddycoegkqxlul" path="res://fonts/Montserrat-Medium.ttf" id="4_cjulw"]
-[ext_resource type="Script" path="res://score_label.gd" id="5_r6vly"]
+[ext_resource type="Script" uid="uid://dq38t4ahwmj3x" path="res://score_label.gd" id="5_r6vly"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r3v3y"]
 size = Vector3(60, 2, 60)

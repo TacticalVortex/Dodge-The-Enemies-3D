@@ -3,7 +3,7 @@ extends CharacterBody3D
 # Minimum speed of the mob in meters per second.
 @export var min_speed = 10
 # Maximum speed of the mob in meters per second.
-@export var max_speed = 18
+@export var max_speed = 17
 
 # Emitted when the player jumped on the mob.
 signal squashed
